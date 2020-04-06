@@ -1,5 +1,5 @@
 from board import Board
-import movement
+from movement import *
 import time
 
 
@@ -9,6 +9,7 @@ class Piece(Board):
     piece = None
     position = None
     previousPosition = None
+    previousPiece = None
     futurePosition = None 
 
     def __init__(self, pos, piece):
@@ -27,15 +28,40 @@ class Piece(Board):
         self.check = validateMove(p, currentPos, futurePosition)
 
     
-    def validateMove(p, currentPos, futurePosition):
+    def validateMove(future_piece, previous_position, future_position, previous_piece):
         """
-        p: the name of the piece
-        currentPos: the current position of p
-        futurePosition: the intended location p is to be moved to
+        future_piece: the name of the piece or 'empty' to capture
+        previous_position: the position of the attacking piece
+        future_position: the location of future_piece 
+        previous_piece: the name of the attacking piece
         """
-        # print("Currently in is validate")
-        return True
-        # pass
+        VALID_LIST = []
+        
+        # Get the array index of previous_position and future_position
+        # fnctions are in movement.py
+        currentPosition = getIndexOfPosition(previous_position)
+        destinationPosition = getIndexOfPosition(future_position)
+
+        # Check that player is not attacking himself
+        if Board.play_belongs_to in future_piece:
+            print("You cant attack yourself")
+            print(f"Current Player: {Board.play_belongs_to}, Future Piece: {future_piece}")
+
+            return False
+
+        # check if it is the current players turn
+        if ( (('white' in Board.play_belongs_to) and ('white' in previous_piece)) or (('black' in Board.play_belongs_to) and ('black' in previous_piece)) ):
+            
+                # Validate move if attacker is a Rook
+                if 'Rook' in previous_piece:
+                    return rook(currentPosition, destinationPosition)
+               
+        else:
+            print("Wait for your turn")
+            print(f"Current Player: {Board.play_belongs_to}, Future Piece: {future_piece}")
+            return False
+
+
             
 
     def isCapture(p, futurePosition):
@@ -70,14 +96,14 @@ class Piece(Board):
                     Piece.position = loc 
                     Piece.piece = Board.pieces[loc]  
                 elif (Piece.previousPosition is not None) and (Piece.previousPosition is not Piece.position):
-                    print(f'Previous: {Piece.previousPosition}, Current Position: {Piece.position}')
                     # Validate move before changing position to the 
                     # new selected position, Piece.piece, Piece.location 
                     # changes to None to allow a new piece to be selected by 
                     # next player. The list of captured increases for current player
 
                     # Break this down into at least 2 functions 
-                    if Piece.validateMove(Piece.piece, Piece.position, Board.pieces[loc]):
+                    print(f"PIECE: {Piece.piece}, PREVIOUS POSITION: {Piece.previousPosition}, FUTURE POSITION: {Piece.position}, PREVIOUS PIECE: {Piece.previousPiece}")
+                    if Piece.validateMove(Piece.piece, Piece.previousPosition, Piece.position, Piece.previousPiece):
                         if Piece.isCapture(Piece.piece, Board.pieces[loc]):
                             # appendToListOfCaptured(Board.pieces[Piece.position] )
                             # set the piece into new location 
@@ -87,14 +113,29 @@ class Piece(Board):
                             Piece.position = None
                             Piece.piece = None 
                             Piece.previousPosition = None
-                             
+                            Piece.previousPiece = None
+
+                            # Change Player 
+                            Board.switch_player()
+
+
 
                     else:
-                        return "error"
+                        '''Return error msg if current player is making a wrong move'''
+                        print("You cant make this move")
+                        Piece.position = None
+                        Piece.piece = None 
+                        Piece.previousPosition = None
+                        Piece.previousPiece = None
+                        break
+                        return None #i doubt this line runs
+
                 elif Board.pieces[loc] == 'empty':
                     return None
                 else:
                     Piece.previousPosition = loc
+                    Piece.previousPiece = Board.pieces[loc]
+                    print(f">>>>>>{Piece.previousPiece}")
                     # Board.pieces[loc] = "empty"
                     # print(Piece.previousPosition)
                  

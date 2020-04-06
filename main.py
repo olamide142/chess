@@ -30,6 +30,9 @@ running = True
 screen.blit(bg, (0,0))
 pygame.display.update()
 
+
+# initialize First player
+
 while running:
     
     for event in pygame.event.get():
@@ -38,6 +41,9 @@ while running:
             location = Piece.getLocation(loc)
             # print(location)
             pygame.display.update()
+
+
+
             # pygame.draw.rect(screen, (123,123,123), rect)
 
             screen.blit(bg, (0,0))
@@ -62,15 +68,7 @@ while running:
         
         # Place each piece in their respective locaton 
         screen.blit(shot,(66*column,66*row))
-
-
-       
-
         column +=1
-
-        # print(f"Row: {row}")
-        # print(f"Column: {column}")
-
 
         # Changing the Column and Row values
         # To arrange the pieces at the right

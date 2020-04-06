@@ -56,13 +56,18 @@
 
 from board import Board
 from piece import Piece
-
+from movement import *
 first = Piece.getLocation((105,98))
 # second = Piece.getLocation((105,98))
 second = Piece.getLocation((550,547))
 
-# print(first)
-# print(second)
+# # print(first)
+# # print(second)
 
-print(Board.pieces)
-# print(Piece.piece)
+# # print(Piece.piece)
+
+
+print("\n\n\n\n")
+
+print(rook(1,1))
+print(getIndexOfPosition('H2'))
