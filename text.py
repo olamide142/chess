@@ -46,3 +46,23 @@
 
 #     pygame.display.update()
 
+
+
+
+
+
+
+
+
+from board import Board
+from piece import Piece
+
+first = Piece.getLocation((105,98))
+# second = Piece.getLocation((105,98))
+second = Piece.getLocation((550,547))
+
+# print(first)
+# print(second)
+
+print(Board.pieces)
+# print(Piece.piece)

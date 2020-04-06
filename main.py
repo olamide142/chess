@@ -19,7 +19,6 @@ bd = Board()
 
 # size of each box in 65 x 65
 # rect = Rect(65*column, 64*row, 65, 65)
-# pygame.draw.rect(screen, (123,123,123), rect)
         
 pygame.display.set_caption('Chess {made by @xlamide}')
 
@@ -37,8 +36,11 @@ while running:
         if event.type == MOUSEBUTTONDOWN:
             loc = pygame.mouse.get_pos()
             location = Piece.getLocation(loc)
-            print(location)
+            # print(location)
             pygame.display.update()
+            # pygame.draw.rect(screen, (123,123,123), rect)
+
+            screen.blit(bg, (0,0))
 
                 
         if event.type == MOUSEBUTTONUP:

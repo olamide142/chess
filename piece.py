@@ -8,6 +8,7 @@ import time
 class Piece(Board):
     piece = None
     position = None
+    previousPosition = None
     futurePosition = None 
 
     def __init__(self, pos, piece):
@@ -15,6 +16,7 @@ class Piece(Board):
         # do this... 
         Piece.piece = piece
         Piece.position = pos
+        Piece
 
 
     def __str__(self):
@@ -31,7 +33,7 @@ class Piece(Board):
         currentPos: the current position of p
         futurePosition: the intended location p is to be moved to
         """
-        print("Currently in is validate")
+        # print("Currently in is validate")
         return True
         # pass
             
@@ -43,7 +45,7 @@ class Piece(Board):
         p: name of piece (eg: whiteRook)
         futurePosition: name of future position (eg: A1)
         """
-        print("Currently in is capture")
+        # print("Currently in is capture")
         return True
 
         # pass
@@ -59,12 +61,16 @@ class Piece(Board):
             # print(f"X axis: {x_axis}, Y axis: {y_axis}")
             # time.sleep(2)
             if (x_y[0] >= x_axis[0] and x_y[0] <= x_axis[1]) and (x_y[1] >= y_axis[0] and x_y[1] <= y_axis[1]):
-                # if the player slecets the same location
+                Piece.position = loc 
+                Piece.piece = Board.pieces[loc] 
+                # if the player selects the same location
                 # twice make position None (De-select piece)
-                if Piece.position is loc:
-                    Piece.position = None 
-                    Piece.piece = None 
-                elif Piece.position is not None:
+                if Piece.previousPosition is loc:
+                    print(f"Selected the same thing Loc:{loc}, Piece.position:{Piece.position}")
+                    Piece.position = loc 
+                    Piece.piece = Board.pieces[loc]  
+                elif (Piece.previousPosition is not None) and (Piece.previousPosition is not Piece.position):
+                    print(f'Previous: {Piece.previousPosition}, Current Position: {Piece.position}')
                     # Validate move before changing position to the 
                     # new selected position, Piece.piece, Piece.location 
                     # changes to None to allow a new piece to be selected by 
@@ -73,17 +79,23 @@ class Piece(Board):
                     # Break this down into at least 2 functions 
                     if Piece.validateMove(Piece.piece, Piece.position, Board.pieces[loc]):
                         if Piece.isCapture(Piece.piece, Board.pieces[loc]):
-                            print("in here")
                             # appendToListOfCaptured(Board.pieces[Piece.position] )
                             # set the piece into new location 
-                            Board.pieces[loc] = Piece.piece
-                            # change previous location to empty
-                            Board.pieces[Piece.position] = 'empty'
+                            Board.pieces[Piece.position] = Board.pieces[str(Piece.previousPosition)]
+                            # change previousPosition location to empty
+                            Board.pieces[Piece.previousPosition] = 'empty'
                             Piece.position = None
                             Piece.piece = None 
-                            Piece.futurePosition = None 
+                            Piece.previousPosition = None
+                             
 
                     else:
                         return "error"
-                else: 
+                elif Board.pieces[loc] == 'empty':
+                    return None
+                else:
+                    Piece.previousPosition = loc
+                    # Board.pieces[loc] = "empty"
+                    # print(Piece.previousPosition)
+                 
                     return Piece(loc, Board.pieces[loc])
