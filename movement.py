@@ -86,7 +86,7 @@ def rook(currentPosition, destinationPosition):
     left = True
     top = True
     right = True
-    bottom = True
+    bottom = True 
 
     while active:
         x,y = currentPosition
@@ -96,13 +96,23 @@ def rook(currentPosition, destinationPosition):
             y -=1
             if isPositionValidInArray((x, y)):
                 parseBoardToArray()
-                if Movement.boardArr[x][y] == 'empty':
-                    VALID_LIST.append((x,y))
-                elif Board.play_belongs_to not in Movement.boardArr[x][y]:
-                    # if opponet player is along the valid path 
-                    # allow the attacker to take him out
-                    VALID_LIST.append((x,y))
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        left = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.append((x,y))
+                        left = False
+                elif Movement.boardArr[x][y] == Board.play_belongs_to:
                     left = False
+                else:
+                    VALID_LIST.append((x,y))
+
             else:
                 left = False
         x,y = currentPosition
@@ -116,13 +126,23 @@ def rook(currentPosition, destinationPosition):
             x -=1
             if isPositionValidInArray((x, y)):
                 parseBoardToArray()
-                if Movement.boardArr[x][y] == 'empty':
-                    VALID_LIST.append((x,y))
-                elif Board.play_belongs_to not in Movement.boardArr[x][y]:
-                    # if opponet player is along the valid path 
-                    # allow the attacker to take him out
-                    VALID_LIST.append((x,y))
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        top = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.append((x,y))
+                        top = False
+                elif Movement.boardArr[x][y] == Board.play_belongs_to:
                     top = False
+                else:
+                    VALID_LIST.append((x,y))
+
             else:
                 top = False
         x,y = currentPosition
@@ -135,13 +155,23 @@ def rook(currentPosition, destinationPosition):
             y +=1
             if isPositionValidInArray((x, y)):
                 parseBoardToArray()
-                if Movement.boardArr[x][y] == 'empty':
-                    VALID_LIST.append((x,y))
-                elif Board.play_belongs_to not in Movement.boardArr[x][y]:
-                    # if opponet player is along the valid path 
-                    # allow the attacker to take him out
-                    VALID_LIST.append((x,y))
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        right = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.append((x,y))
+                        right = False
+                elif Movement.boardArr[x][y] == Board.play_belongs_to:
                     right = False
+                else:
+                    VALID_LIST.append((x,y))
+
             else:
                 right = False
         x,y = currentPosition
@@ -155,13 +185,23 @@ def rook(currentPosition, destinationPosition):
             x +=1
             if isPositionValidInArray((x, y)):
                 parseBoardToArray()
-                if Movement.boardArr[x][y] == 'empty':
-                    VALID_LIST.append((x,y))
-                elif Board.play_belongs_to not in Movement.boardArr[x][y]:
-                    # if opponet player is along the valid path 
-                    # allow the attacker to take him out
-                    VALID_LIST.append((x,y))
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        bottom = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.append((x,y))
+                        bottom = False
+                elif Movement.boardArr[x][y] == Board.play_belongs_to:
                     bottom = False
+                else:
+                    VALID_LIST.append((x,y))
+
             else:
                 bottom = False
         x,y = currentPosition
@@ -171,6 +211,7 @@ def rook(currentPosition, destinationPosition):
         active = False
         print(f"\n\n Valid LIST : {VALID_LIST}")
         if destinationPosition in VALID_LIST:
+            print("it returned true")
             return True
         else:
             return False

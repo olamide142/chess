@@ -1,0 +1,4 @@
+Fix the Rook piece bug:
+    Rook piece should not be able to move over his own piece 
+    (White Rook piece shouldn't be able to move over White Pawn)
+    
