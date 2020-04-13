@@ -58,11 +58,14 @@ class Piece(Board):
                 # Validate move if attacker is a Pawn
                 elif 'Pawn' in previous_piece:
                     return pawn(currentPosition, destinationPosition)
+                # Validate move if attacker is a Bishop
+                elif 'Bishop' in previous_piece:
+                    return bishop(currentPosition, destinationPosition)
 
                
         else:
             print("Wait for your turn")
-            print(f"Current Player: {Board.play_belongs_to}, Future Piece: {future_piece}")
+            print(f"Current Player: {Board.play_belongs_to}")
             return False
 
 
@@ -112,6 +115,9 @@ class Piece(Board):
                             # appendToListOfCaptured(Board.pieces[Piece.position] )
                             # set the piece into new location 
                             if Piece.youDoIt == True:
+                                # this will only run if the switch
+                                # did not hapen from the movement 
+                                # did not already happen at the movementmodule
                                 Board.pieces[Piece.position] = Board.pieces[str(Piece.previousPosition)]
                             # change previousPosition location to empty
                             Board.pieces[Piece.previousPosition] = 'empty'
@@ -145,3 +151,5 @@ class Piece(Board):
                     # print(Piece.previousPosition)
                  
                     return Piece(loc, Board.pieces[loc])
+            else:
+                pass
