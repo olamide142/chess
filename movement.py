@@ -446,7 +446,7 @@ def bishop(currentPosition, destinationPosition):
     VALID_LIST = set([])
 
     parseBoardToArray()
-    """Check if this move is valid for a Pawn"""
+    """Check if this move is valid for a Bishop"""
 
     active = True
     leftUp = True
@@ -572,13 +572,257 @@ def bishop(currentPosition, destinationPosition):
 
 
 
+def knight(currentPosition, destinationPosition):
+     # list of positions that can be played to 
+    VALID_LIST = set([])
+
+    parseBoardToArray()
+    """Check if this move is valid for a Knight"""
+
+    active = True
+
+    rightOne =True
+    rightTwo = True
+    rightThree = True
+    rightFour = True
+    
+    leftOne =True
+    leftTwo = True
+    leftThree = True
+    leftFour = True
+    
+    while active:
+        x,y = currentPosition
+
+        while rightOne:
+            x = x-2
+            y = y+1
+            if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        rightOne = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.add((x,y))
+                        rightOne = False
+                else:
+                    VALID_LIST.add((x,y))
+                    rightOne = False
+            else:
+                rightOne = False
+        
+        x,y = currentPosition
+
+
+        while rightTwo:
+            x = x-1
+            y = y+2
+            if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        rightTwo = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.add((x,y))
+                        rightTwo = False
+                else:
+                    VALID_LIST.add((x,y))
+                    rightTwo = False
+            else:
+                rightTwo = False
+
+        x,y = currentPosition
+        
+        
+        while rightThree:
+            x = x+1
+            y = y+2
+            if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        rightThree = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.add((x,y))
+                        rightThree = False
+                else:
+                    VALID_LIST.add((x,y))
+                    rightThree = False
+            else:
+                rightThree = False
+
+        x,y = currentPosition
+
+
+        while rightFour:
+            x = x+2
+            y = y+1
+            if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        rightFour = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.add((x,y))
+                        rightFour = False
+                else:
+                    VALID_LIST.add((x,y))
+                    rightFour = False
+            else:
+                rightFour = False
+
+        x,y = currentPosition
 
 
 
-# def knight(currentPosition, futurePosition):
+        while leftOne:
+            x = x+2
+            y = y-1
+            if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        leftOne = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.add((x,y))
+                        leftOne = False
+                else:
+                    VALID_LIST.add((x,y))
+                    leftOne = False
+            else:
+                leftOne = False
+
+        x,y = currentPosition
+
+
+
+        while leftTwo:
+            x = x+1
+            y = y-2
+            if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        leftTwo = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.add((x,y))
+                        leftTwo = False
+                else:
+                    VALID_LIST.add((x,y))
+                    leftTwo = False
+            else:
+                leftTwo = False
+
+        x,y = currentPosition
+        
+        
+        
+        while leftThree:
+            x = x-1
+            y = y-2
+            if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        leftThree = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.add((x,y))
+                        leftThree = False
+                else:
+                    VALID_LIST.add((x,y))
+                    leftThree = False
+            else:
+                leftThree = False
+
+        x,y = currentPosition
+
+
+
+        while leftFour:
+            x = x-2
+            y = y-1
+            if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # Check if the position is not empty
+                if Movement.boardArr[x][y] != 'empty':
+                    # check if the piece occupying it is players piece
+                    # if so stop checkin this direction
+                    if Movement.boardArr[x][y] == Board.play_belongs_to:
+                        leftFour = False
+                    else:
+                        # if this postion is occupied by opponnet piece
+                        # this position is valid but every other position 
+                        # after it is invalid  
+                        VALID_LIST.add((x,y))
+                        leftFour = False
+                else:
+                    VALID_LIST.add((x,y))
+                    leftFour = False
+            else:
+                leftFour = False
+
+        x,y = currentPosition
+
+
+
+        # Stop The main loop
+        active = False
+        print(f"\n\n Valid LIST : {VALID_LIST}")
+        if destinationPosition in VALID_LIST:
+            from piece import Piece
+            Piece.youDoIt = True
+            return True
+        else:
+            return False
+
+
+
+
+
+# def queen(currentPosition, destinationPosition):
 #     pass
-# def queen(currentPosition, futurePosition):
-#     pass
-# def king(currentPosition, futurePosition):
+# def king(currentPosition, destinationPosition):
 #     pass
 
