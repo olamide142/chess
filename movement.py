@@ -339,7 +339,7 @@ def pawn(currentPosition, destinationPosition):
         elif (x != 6) and (Piece.previousPiece == 'whitePawn'):
             # 2 steps forward invalid only one 
             x = x-1
-            if (Movement.boardArr[x][y] == 'empty') and (Movement.boardArr[x][y] != Board.opposite(Board.play_belongs_to)):
+            if (Movement.boardArr[x][y] == 'empty') or (Movement.boardArr[x][y] == Board.opposite(Board.play_belongs_to)):
                 print("{+}Everthimg is a it back to back")
                 if isPositionValidInArray((x, y)):
                     VALID_LIST.add((x,y))
@@ -371,7 +371,7 @@ def pawn(currentPosition, destinationPosition):
             # 2 steps forward invalid only one 
             parseBoardToArray()
             x = x+1
-            if (Movement.boardArr[x][y] == 'empty') and (Movement.boardArr[x][y] != Board.opposite(Board.play_belongs_to)):
+            if (Movement.boardArr[x][y] == 'empty') or (Movement.boardArr[x][y] == Board.opposite(Board.play_belongs_to)):
                 if isPositionValidInArray((x, y)):
                     VALID_LIST.add((x,y))
             else:
@@ -403,6 +403,9 @@ def pawn(currentPosition, destinationPosition):
 
         print(f"\n\n Valid LIST : {VALID_LIST}")
         if destinationPosition in VALID_LIST:
+            if (destinationPosition[0] == 0) or (destinationPosition[0] == 7):
+                Board.pieces[Piece.position] = 'blackKnight'
+
             return True
         else:
             return False
