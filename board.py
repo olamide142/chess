@@ -7,7 +7,7 @@ class Board(Player):
         'A7':"blackPawn", 'B7':"blackPawn", 'C7':"blackPawn", 'D7':"blackPawn", 'E7':"blackPawn", 'F7':"blackPawn", 'G7':"blackPawn", 'H7':"blackPawn",
         'A6':"empty", 'B6':"empty", 'C6':"empty", 'D6':"empty", 'E6':"empty", 'F6':"empty", 'G6':"empty", 'H6':"empty",
         'A5':"empty", 'B5':"empty", 'C5':"empty", 'D5':"empty", 'E5':"empty", 'F5':"empty", 'G5':"empty", 'H5':"empty",
-        'A4':"empty", 'B4':"empty", 'C4':"empty", 'D4':"empty", 'E4':"empty", 'F4':"empty", 'G4':"empty", 'H4':"empty",
+        'A4':"empty", 'B4':"empty", 'C4':"empty", 'D4':"empty", 'E4':"whiteKing", 'F4':"empty", 'G4':"empty", 'H4':"empty",
         'A3':"empty", 'B3':"empty", 'C3':"empty", 'D3':"empty", 'E3':"empty", 'F3':"empty", 'G3':"empty", 'H3':"empty",
         'A2':"whiteQueen", 'B2':"whitePawn", 'C2':"whitePawn", 'D2':"whitePawn", 'E2':"whitePawn", 'F2':"whitePawn", 'G2':"whitePawn", 'H2':"whitePawn",
         'A1':"whiteRook", 'B1':"whiteKnight", 'C1':"whiteBishop", 'D1':"whiteQueen", 'E1':"whiteKing", 'F1':"whiteBishop", 'G1':"whiteKnight", 'H1':"whiteRook",
