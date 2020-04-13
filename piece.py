@@ -64,6 +64,9 @@ class Piece(Board):
                 # Validate move if attacker is a Knight
                 elif 'Knight' in previous_piece:
                     return knight(currentPosition, destinationPosition)
+                # Validate move if attacker is a Queen
+                elif 'Queen' in previous_piece:
+                    return queen(currentPosition, destinationPosition)
 
                
         else:
