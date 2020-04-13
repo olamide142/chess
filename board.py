@@ -1,4 +1,4 @@
-from player import Player
+from player import Player 
 
 class Board(Player):
     # Arrangement of all chess pieces

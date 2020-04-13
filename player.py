@@ -1,3 +1,4 @@
+
 class Player():
     play_belongs_to = 'white'
 
@@ -11,4 +12,10 @@ class Player():
             Player.play_belongs_to = 'black'
         else:
             Player.play_belongs_to = 'white'
+    
+    def opposite(color):
+        if color == 'black':
+            return 'white'
+        elif color == 'white':
+            return 'black'
 

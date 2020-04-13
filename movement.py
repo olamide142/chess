@@ -1,5 +1,5 @@
 from board import Board
-# from piece import Piece
+import piece
 class Movement(Board):
     boardArr = [
         ['A8', 'B8', 'C8', 'D8', 'E8', 'F8', 'G8', 'H8'],
@@ -178,7 +178,6 @@ def rook(currentPosition, destinationPosition):
 
 
 
-
         # Check all the boxes to the bottom of current position
         # and stops when there is a filled box
         while bottom:
@@ -211,10 +210,205 @@ def rook(currentPosition, destinationPosition):
         active = False
         print(f"\n\n Valid LIST : {VALID_LIST}")
         if destinationPosition in VALID_LIST:
-            print("it returned true")
             return True
         else:
             return False
+
+
+
+
+def pawn(currentPosition, destinationPosition):
+     # list of positions that can be played to 
+    VALID_LIST = set([])
+
+    parseBoardToArray()
+    """Check if this move is valid for a Rook"""
+
+    active = True
+
+    while active:
+
+        x,y = currentPosition
+
+
+        # Check diagonalTopRight 
+        x = x-1
+        y = y+1
+        if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # if this position is not empty
+                # and the players own piece is 
+                # not the occupant. VALID
+                if (Movement.boardArr[x][y] != 'empty') and (Board.play_belongs_to not in Movement.boardArr[x][y]):
+                    VALID_LIST.add((x,y))
+                else:
+                    pass 
+                    # Do Nothing
+        else:
+            pass
+            # Do Nothing
+        x,y = currentPosition
+        
+
+
+        # Check the diagonalTopLeft
+        x = x-1
+        y = y-1
+        if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # if this position is not empty
+                # and the players own piece is 
+                # not the occupant. VALID
+                if (Movement.boardArr[x][y] != 'empty') and (Board.play_belongs_to not in Movement.boardArr[x][y]):
+                    VALID_LIST.add((x,y))
+                else:
+                    pass 
+                    # Do Nothing
+        else:
+            pass
+            # Do Nothing
+        x,y = currentPosition
+
+
+
+        # check diagonalBottomRight
+        x = x+1
+        y = y+1
+        if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # if this position is not empty
+                # and the players own piece is 
+                # not the occupant. VALID
+                if (Movement.boardArr[x][y] != 'empty') and (Board.play_belongs_to not in Movement.boardArr[x][y]):
+                    VALID_LIST.add((x,y))
+                else:
+                    pass 
+                    # Do Nothing
+        else:
+            pass
+            # Do Nothing
+        x,y = currentPosition
+
+
+
+        # check diagoanlBottomLeft
+        x = x+1
+        y = y-1
+        if isPositionValidInArray((x, y)):
+                parseBoardToArray()
+                # if this position is not empty
+                # and the players own piece is 
+                # not the occupant. VALID
+                if (Movement.boardArr[x][y] != 'empty') and (Board.play_belongs_to not in Movement.boardArr[x][y]):
+                    VALID_LIST.add((x,y))
+                else:
+                    pass 
+                    # Do Nothing
+        else:
+            pass
+            # Do Nothing
+        x,y = currentPosition
+
+
+
+
+        # check forward movement 
+        # check if pawn is at initial position
+        # if so pawn is vid to move 2 steps forward
+
+
+        # CHECK FOR WHITE ROOK 
+        from piece import Piece
+        if (x == 6) and (Movement.boardArr[x][y] in Piece.previousPiece) and (Movement.boardArr[x][y] == 'white'):
+    
+            # 2 steps forward valid 
+            parseBoardToArray()
+            x = x-1
+            if (Movement.boardArr[x][y] == 'empty') or (Movement.boardArr[x][y] == Board.opposite(Board.play_belongs_to)):
+                VALID_LIST.add((x,y))
+                # Check the next step forward
+                x = x-1
+                if (Movement.boardArr[x][y] == 'empty') and (Movement.boardArr[x+1][y] == 'empty') or (Movement.boardArr[x][y] == Board.opposite(Board.play_belongs_to)):
+                    if isPositionValidInArray((x, y)):
+                        VALID_LIST.add((x,y))
+            else:
+                pass
+            x,y = currentPosition
+
+
+        elif (x != 6) and (Piece.previousPiece == 'whitePawn'):
+            # 2 steps forward invalid only one 
+            x = x-1
+            if (Movement.boardArr[x][y] == 'empty') and (Movement.boardArr[x][y] != Board.opposite(Board.play_belongs_to)):
+                print("{+}Everthimg is a it back to back")
+                if isPositionValidInArray((x, y)):
+                    VALID_LIST.add((x,y))
+            else:
+                pass
+            x,y = currentPosition
+
+
+        # CHECK FOR BLACK ROOK 
+        if (x == 1) and (Movement.boardArr[x][y] in Piece.previousPiece) and (Movement.boardArr[x][y] == 'black'):
+        
+            # 2 steps forward valid 
+            parseBoardToArray()
+            x = x+1
+            if (Movement.boardArr[x][y] == 'empty') or (Movement.boardArr[x][y] == Board.opposite(Board.play_belongs_to)):
+                VALID_LIST.add((x,y))
+                # Check the next step forward
+                x = x+1
+                # To avoid players first pawn move jumping over any piece or striking his own piece 
+                if ((Movement.boardArr[x][y] == 'empty') and (Movement.boardArr[x-1][y] == 'empty')) or (Movement.boardArr[x][y] == Board.opposite(Board.play_belongs_to)):
+                    if isPositionValidInArray((x, y)):
+                        VALID_LIST.add((x,y))
+            else:
+                pass
+            x,y = currentPosition
+
+
+        elif (x != 1) and (Piece.previousPiece == 'blackPawn'):
+            # 2 steps forward invalid only one 
+            parseBoardToArray()
+            x = x+1
+            if (Movement.boardArr[x][y] == 'empty') and (Movement.boardArr[x][y] != Board.opposite(Board.play_belongs_to)):
+                if isPositionValidInArray((x, y)):
+                    VALID_LIST.add((x,y))
+            else:
+                pass
+            x,y = currentPosition
+
+        
+
+
+        # Stop The main loop
+        active = False
+
+        # check player is not trying to move pawn backwards
+        x,y = currentPosition
+        if Board.play_belongs_to == 'white':
+            # A white pawn cannot move backwards 
+            for li in list(VALID_LIST):
+            # check that every x cordinate is not increasing
+            # if so remove the postion from valid_list
+                if li[0] > x:
+                    VALID_LIST.remove(li)
+        elif Board.play_belongs_to == 'black':
+            # A black pawn cannot move backwards 
+            for li in list(VALID_LIST):
+            # check that every x cordinate is not decreasing
+            # if so remove the postion from valid_list
+                if li[0] < x:
+                    VALID_LIST.remove(li)
+
+        print(f"\n\n Valid LIST : {VALID_LIST}")
+        if destinationPosition in VALID_LIST:
+            return True
+        else:
+            return False
+            
+
+
 
 
 
@@ -229,7 +423,5 @@ def rook(currentPosition, destinationPosition):
 # def queen(currentPosition, futurePosition):
 #     pass
 # def king(currentPosition, futurePosition):
-#     pass
-# def pawn(currentPosition, futurePosition):
 #     pass
 

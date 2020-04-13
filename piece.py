@@ -35,7 +35,6 @@ class Piece(Board):
         future_position: the location of future_piece 
         previous_piece: the name of the attacking piece
         """
-        VALID_LIST = []
         
         # Get the array index of previous_position and future_position
         # fnctions are in movement.py
@@ -55,6 +54,10 @@ class Piece(Board):
                 # Validate move if attacker is a Rook
                 if 'Rook' in previous_piece:
                     return rook(currentPosition, destinationPosition)
+                # Validate move if attacker is a Pawn
+                elif 'Pawn' in previous_piece:
+                    return pawn(currentPosition, destinationPosition)
+
                
         else:
             print("Wait for your turn")
