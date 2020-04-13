@@ -65,7 +65,12 @@ def isPositionValidInArray(position):
     return False
 
 
-
+def getPositionOfPiece(pieceName):
+    a = Board.clone
+    for i in a:
+        if a[i] == pieceName:
+            return i
+    
 
 
 # TYPES OF PIECE
@@ -210,6 +215,9 @@ def rook(currentPosition, destinationPosition):
         active = False
         print(f"\n\n Valid LIST : {VALID_LIST}")
         if destinationPosition in VALID_LIST:
+            from piece import Piece
+            Board.pieces[Piece.position] = Piece.previousPiece
+            Piece.youDoIt = False
             return True
         else:
             return False
@@ -339,8 +347,7 @@ def pawn(currentPosition, destinationPosition):
         elif (x != 6) and (Piece.previousPiece == 'whitePawn'):
             # 2 steps forward invalid only one 
             x = x-1
-            if (Movement.boardArr[x][y] == 'empty') or (Movement.boardArr[x][y] == Board.opposite(Board.play_belongs_to)):
-                print("{+}Everthimg is a it back to back")
+            if (Movement.boardArr[x][y] == 'empty'):
                 if isPositionValidInArray((x, y)):
                     VALID_LIST.add((x,y))
             else:
@@ -371,7 +378,7 @@ def pawn(currentPosition, destinationPosition):
             # 2 steps forward invalid only one 
             parseBoardToArray()
             x = x+1
-            if (Movement.boardArr[x][y] == 'empty') or (Movement.boardArr[x][y] == Board.opposite(Board.play_belongs_to)):
+            if (Movement.boardArr[x][y] == 'empty'):
                 if isPositionValidInArray((x, y)):
                     VALID_LIST.add((x,y))
             else:
@@ -403,10 +410,35 @@ def pawn(currentPosition, destinationPosition):
 
         print(f"\n\n Valid LIST : {VALID_LIST}")
         if destinationPosition in VALID_LIST:
-            if (destinationPosition[0] == 0) or (destinationPosition[0] == 7):
-                Board.pieces[Piece.position] = 'blackKnight'
+            from piece import Piece
+            if (destinationPosition[0] == 0):
+                print("Transform to QUEEN!!!!!!!!!!!!!")
+                # now change the previous position to a
+                # whiteQueen so when the board updates
+                # the previos piece would be seen as a Queen
+                Board.pieces[Piece.position] = 'whiteQueen'
+                Piece.youDoIt = False
+                return True
 
-            return True
+            elif (destinationPosition[0] == 7):
+                print("Transform to QUEEN!!!!!!!!!!!!!")
+                # now change the previous position to a
+                # blackQueen so when the board updates
+                # the previos piece would be seen as a Queen
+                Board.pieces[Piece.position] = 'blackQueen'
+                Piece.youDoIt = False
+                return True
+            elif Board.play_belongs_to == 'white':
+                Piece.youDoIt = True
+                return True
+            elif Board.play_belongs_to == 'black':
+                Piece.youDoIt = True
+                return True
+
+
+            
+
+
         else:
             return False
             

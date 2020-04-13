@@ -11,6 +11,7 @@ class Piece(Board):
     previousPosition = None
     previousPiece = None
     futurePosition = None 
+    youDoIt = True
 
     def __init__(self, pos, piece):
         # This is probably not a correct way to 
@@ -110,7 +111,8 @@ class Piece(Board):
                         if Piece.isCapture(Piece.piece, Board.pieces[loc]):
                             # appendToListOfCaptured(Board.pieces[Piece.position] )
                             # set the piece into new location 
-                            Board.pieces[Piece.position] = Board.pieces[str(Piece.previousPosition)]
+                            if Piece.youDoIt == True:
+                                Board.pieces[Piece.position] = Board.pieces[str(Piece.previousPosition)]
                             # change previousPosition location to empty
                             Board.pieces[Piece.previousPosition] = 'empty'
                             Piece.position = None

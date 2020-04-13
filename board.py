@@ -3,8 +3,8 @@ from player import Player
 class Board(Player):
     # Arrangement of all chess pieces
     pieces = {
-        'A8':"blackRook", 'B8':"blackKnight", 'C8':"blackBishop", 'D8':"blackQueen", 'E8':"blackKing", 'F8':"blackBishop", 'G8':"blackKnight", 'H8':"blackRook",
-        'A7':"blackPawn", 'B7':"blackPawn", 'C7':"blackPawn", 'D7':"blackPawn", 'E7':"blackPawn", 'F7':"blackPawn", 'G7':"blackPawn", 'H7':"blackPawn",
+        'A8':"empty", 'B8':"blackKnight", 'C8':"blackBishop", 'D8':"blackQueen", 'E8':"blackKing", 'F8':"blackBishop", 'G8':"blackKnight", 'H8':"blackRook",
+        'A7':"whitePawn", 'B7':"blackPawn", 'C7':"blackPawn", 'D7':"blackPawn", 'E7':"blackPawn", 'F7':"blackPawn", 'G7':"blackPawn", 'H7':"blackPawn",
         'A6':"empty", 'B6':"empty", 'C6':"empty", 'D6':"empty", 'E6':"empty", 'F6':"empty", 'G6':"empty", 'H6':"empty",
         'A5':"empty", 'B5':"empty", 'C5':"empty", 'D5':"empty", 'E5':"empty", 'F5':"empty", 'G5':"empty", 'H5':"empty",
         'A4':"empty", 'B4':"empty", 'C4':"empty", 'D4':"empty", 'E4':"empty", 'F4':"empty", 'G4':"empty", 'H4':"empty",
@@ -12,6 +12,8 @@ class Board(Player):
         'A2':"whitePawn", 'B2':"whitePawn", 'C2':"whitePawn", 'D2':"whitePawn", 'E2':"whitePawn", 'F2':"whitePawn", 'G2':"whitePawn", 'H2':"whitePawn",
         'A1':"whiteRook", 'B1':"whiteKnight", 'C1':"whiteBishop", 'D1':"whiteQueen", 'E1':"whiteKing", 'F1':"whiteBishop", 'G1':"whiteKnight", 'H1':"whiteRook",
     }
+
+    clone = pieces
 
     # This are the cordinates of each tile 
     # (left, top, right, bottom) same as graphical representation (-x, +y, +x, -y)
